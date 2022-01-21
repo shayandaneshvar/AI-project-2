@@ -13,8 +13,9 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     // https://mvnrepository.com/artifact/edu.stanford.nlp/stanford-corenlp
-    implementation group: 'edu.stanford.nlp', name: 'stanford-corenlp', version: '4.2.0'
-
+    implementation group: 'edu.stanford.nlp', name: 'stanford-corenlp', version: '4.4.0'
+//    implementation 'edu.stanford.nlp:stanford-corenlp:4.4.0:models'
+    implementation files('lib/stanford-corenlp-models-current.jar')
 }
 
 test {
