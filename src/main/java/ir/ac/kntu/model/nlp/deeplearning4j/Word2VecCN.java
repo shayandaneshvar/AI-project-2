@@ -46,8 +46,7 @@ public final class Word2VecCN {
     }
 
     public Word2Vec fit() {
-        Word2Vec vec =
-                new Word2Vec.Builder()
+        Word2Vec vec = new Word2Vec.Builder()
                         .minWordFrequency(minWordFrequency)
                         .iterations(iterations)
                         .layerSize(layerSize)
