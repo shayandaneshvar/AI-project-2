@@ -1,11 +1,13 @@
 package ir.ac.kntu.model.ga;
 
 
+import ir.ac.kntu.model.Chromosome;
+
 import java.util.BitSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GAChromosome extends Chromosome {
-    private BitSet chromosome;
+    private final BitSet chromosome;
     private static final double alpha = 1;
     private static final double beta = 1;
 
@@ -13,6 +15,11 @@ public class GAChromosome extends Chromosome {
     public GAChromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
         super(sentences, sentenceScores, similarities);
         chromosome = new BitSet(sentences.length);
+    }
+
+    public GAChromosome(GAChromosome gaChromosome, BitSet chromosome) {
+        super(gaChromosome.sentences, gaChromosome.sentenceScores, gaChromosome.similarities);
+        this.chromosome = chromosome;
     }
 
     @Override
@@ -29,6 +36,19 @@ public class GAChromosome extends Chromosome {
             }
         }
         fitness = alpha * scoreSum - beta * similaritySum;
+    }
+
+    public BitSet getChromosome() {
+        return chromosome;
+    }
+
+    @Override
+    public void mutate(){
+        for (int i = 0; i < chromosome.length(); i++) {
+            if(ThreadLocalRandom.current().nextBoolean()) {
+                chromosome.set(i, ThreadLocalRandom.current().nextBoolean());
+            }
+        }
     }
 
     @Override

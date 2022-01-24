@@ -4,6 +4,8 @@ import ir.ac.kntu.view.View;
 
 public class MainController implements Runnable {
 
+
+
     public void init() {
         run();
     }
@@ -11,6 +13,5 @@ public class MainController implements Runnable {
     @Override
     public void run() {
         String question = View.getCommand();
-
     }
 }

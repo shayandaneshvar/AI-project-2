@@ -1,9 +1,9 @@
-package ir.ac.kntu.model.ga;
+package ir.ac.kntu.model;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-public abstract class Chromosome {
+
+public abstract class Chromosome implements Comparable<Chromosome> {
     protected String[] sentences;
     protected final double[] sentenceScores;
     protected double fitness;
@@ -15,6 +15,11 @@ public abstract class Chromosome {
         this.similarities = similarities;
     }
 
+    public abstract void mutate();
+
+    public static Chromosome newChromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
+        throw new RuntimeException();
+    }
 
     public abstract void calculateFitness();
 
@@ -62,6 +67,8 @@ public abstract class Chromosome {
         return sentenceScores;
     }
 
+
+
     public static double[][] calculateSimilarities(String[] sentences){
         var result = new double[sentences.length][sentences.length];
         for(int i = 0; i < sentences.length; i++){
@@ -85,6 +92,10 @@ public abstract class Chromosome {
         return result;
     }
 
+    @Override
+    public int compareTo(Chromosome o) {
+        return (int)((- fitness + o.fitness) * 1e7);
+    }
 
 
 }

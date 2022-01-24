@@ -26,4 +26,9 @@ public enum ScannerWrapper implements Closeable {
     public void close() throws IOException {
         scanner.close();
     }
+
+    public static boolean hasNextLine() {
+        return INSTANCE.scanner.hasNextLine();
+    }
+
 }
