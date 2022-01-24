@@ -16,17 +16,6 @@ dependencies {
     implementation group: 'edu.stanford.nlp', name: 'stanford-corenlp', version: '4.4.0'
 //    implementation 'edu.stanford.nlp:stanford-corenlp:4.4.0:models'
     implementation files('lib/stanford-corenlp-models-current.jar')
-
-    compile "commons-logging:commons-logging:1.1.1"
-    compile "org.slf4j:slf4j-api:1.7.12"
-    compile "org.slf4j:jcl-over-slf4j:1.7.12"
-    compile "org.slf4j:slf4j-log4j12:1.7.12"
-    compile "log4j:log4j:1.2.17"
-    compile "org.deeplearning4j:deeplearning4j-core:1.0.0-M1.1"
-    compile "org.deeplearning4j:deeplearning4j-nlp:1.0.0-M1.1"
-    compile "org.nd4j:nd4j-native:1.0.0-M1.1"
-    compile "org.nd4j:nd4j-native:1.0.0-M1.1"
-    compile "org.ansj:ansj_seg:5.1.1"
 }
 
 test {
