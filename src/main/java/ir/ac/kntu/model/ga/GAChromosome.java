@@ -7,8 +7,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GAChromosome extends Chromosome {
     private BitSet chromosome;
 
-    public GAChromosome(String text) {
-        super(text);
+
+    public GAChromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
+        super(sentences, sentenceScores, similarities);
         chromosome = new BitSet(sentences.length);
     }
 

@@ -8,9 +8,11 @@ public abstract class Chromosome {
     protected final double[] sentenceScores;
     protected double fitness;
     protected double[][] similarities;
-    public Chromosome(String[] sentences, double[] sentenceScores) {
+
+    public Chromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
         this.sentenceScores = sentenceScores;
         this.sentences = sentences;
+        this.similarities = similarities;
     }
 
 
