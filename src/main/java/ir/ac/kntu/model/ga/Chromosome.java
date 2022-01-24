@@ -8,10 +8,11 @@ public abstract class Chromosome {
     protected final double[] sentenceScores;
     protected double fitness;
     protected double[][] similarities;
-    public Chromosome(String[] sentences, double[] sentenceScores) {
+
+    public Chromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
         this.sentenceScores = sentenceScores;
         this.sentences = sentences;
-        similarities = ;
+        this.similarities = similarities;
     }
 
 
@@ -61,9 +62,9 @@ public abstract class Chromosome {
         return sentenceScores;
     }
 
-    public static double[][] calculateSimilarities(String[] sentences){
+    public static double[][] calculateSimilarities(String[] sentences) {
         var result = new double[sentences.length][sentences.length];
-
+        // TODO: 1/24/2022  
 
         return result;
     }
