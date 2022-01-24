@@ -65,12 +65,7 @@ public abstract class Chromosome {
     public static double[][] calculateSimilarities(String[] sentences){
         var result = new double[sentences.length][sentences.length];
         for(int i = 0; i < sentences.length; i++){
-            for (int j = i ; j < sentences.length; j++) {
-                if(i == j){
-                    result[i][j] = 1;
-                    result[j][i] = 1;
-                    continue;
-                }
+            for (int j = i + 1 ; j < sentences.length; j++) {
                 Set<String> wordsI = new HashSet<>(Set.of(sentences[i]
                         .replaceAll("[,()\\[\\]\\-+=*@#&^%$.;!?]", " ").split(" ")));
                 Set<String> wordsJ = Set.of(sentences[j].replaceAll("[,()\\[\\]\\-+=*@#&^%$.;!?]", " ")
