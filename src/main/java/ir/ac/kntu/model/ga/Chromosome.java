@@ -1,7 +1,7 @@
 package ir.ac.kntu.model.ga;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class Chromosome {
     protected String[] sentences;
@@ -11,7 +11,6 @@ public abstract class Chromosome {
     public Chromosome(String[] sentences, double[] sentenceScores) {
         this.sentenceScores = sentenceScores;
         this.sentences = sentences;
-        similarities = ;
     }
 
 
@@ -63,8 +62,32 @@ public abstract class Chromosome {
 
     public static double[][] calculateSimilarities(String[] sentences){
         var result = new double[sentences.length][sentences.length];
+        for(int i = 0; i < sentences.length; i++){
+            for (int j = i ; j < sentences.length; j++) {
+                if(i == j){
+                    result[i][j] = 1;
+                    result[j][i] = 1;
+                    continue;
+                }
+                Set<String> wordsI = new HashSet<>(Set.of(sentences[i]
+                        .replaceAll("[,()\\[\\]\\-+=*@#&^%$.;!?]", " ").split(" ")));
+                Set<String> wordsJ = Set.of(sentences[j].replaceAll("[,()\\[\\]\\-+=*@#&^%$.;!?]", " ")
+                        .split(" "));
 
+                long intersectionCount = wordsJ.parallelStream().filter(wordsI::contains).count();
+                wordsI.addAll(wordsJ);
 
+                long unionCount = wordsI.size();
+
+                result[i][j] = ((float)intersectionCount) / unionCount;
+
+                result[j][i] = result[i][j];
+
+            }
+        }
         return result;
     }
+
+
+
 }
