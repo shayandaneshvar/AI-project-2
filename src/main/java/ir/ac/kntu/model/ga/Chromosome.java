@@ -40,7 +40,6 @@ public abstract class Chromosome {
 //                .replace("[", " ")
 //                .replace("]", " ")
 //                .replace(",", " ");
-
         Map<String, Integer> frequencies = new HashMap<>();
         for (var word : text.split(" ")) {
             if (frequencies.containsKey(word)) {
