@@ -1,9 +1,9 @@
-package ir.ac.kntu.model.ga;
+package ir.ac.kntu.model.genetic.ga;
 
 
-import ir.ac.kntu.model.Chromosome;
+import ir.ac.kntu.model.BitSet;
+import ir.ac.kntu.model.genetic.Chromosome;
 
-import java.util.BitSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GAChromosome extends Chromosome {
@@ -13,6 +13,15 @@ public class GAChromosome extends Chromosome {
     public GAChromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
         super(sentences, sentenceScores, similarities);
         chromosome = new BitSet(sentences.length);
+    }
+
+    @Override
+    public String getEquivalentText() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < chromosome.length(); i++) {
+            stringBuilder.append(chromosome.get(i) ? sentences[i] : "");
+        }
+        return stringBuilder.toString();
     }
 
     public GAChromosome(GAChromosome gaChromosome, BitSet chromosome) {
@@ -27,7 +36,7 @@ public class GAChromosome extends Chromosome {
         for (int i = 0; i < chromosome.length(); i++) {
             scoreSum += chromosome.get(i) ? super.sentenceScores[i] : 0;
             for (int j = 0; j < sentences.length; j++) {
-                if(i == j){
+                if (i == j) {
                     continue;
                 }
                 similaritySum += similarities[i][j];
@@ -41,9 +50,9 @@ public class GAChromosome extends Chromosome {
     }
 
     @Override
-    public void mutate(){
+    public void mutate() {
         for (int i = 0; i < chromosome.length(); i++) {
-            if(ThreadLocalRandom.current().nextBoolean()) {
+            if (ThreadLocalRandom.current().nextBoolean()) {
                 chromosome.set(i, ThreadLocalRandom.current().nextBoolean());
             }
         }

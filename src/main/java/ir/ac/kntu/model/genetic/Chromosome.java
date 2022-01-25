@@ -1,15 +1,16 @@
-package ir.ac.kntu.model;
+package ir.ac.kntu.model.genetic;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public abstract class Chromosome implements Comparable<Chromosome> {
-    protected String[] sentences;
+    protected final String[] sentences;
     protected final double[] sentenceScores;
-    protected double fitness;
-    protected double[][] similarities;
+    protected final double[][] similarities;
     protected static final double alpha = 1;
     protected static final double beta = 1;
+    protected double fitness;
 
 
     public Chromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
@@ -18,11 +19,14 @@ public abstract class Chromosome implements Comparable<Chromosome> {
         this.similarities = similarities;
     }
 
+    public abstract String getEquivalentText();
+
+    public double getFitness() {
+        return fitness;
+    }
+
     public abstract void mutate();
 
-    public static Chromosome newChromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
-        throw new RuntimeException();
-    }
 
     public abstract void calculateFitness();
 
@@ -67,24 +71,22 @@ public abstract class Chromosome implements Comparable<Chromosome> {
     }
 
 
-
-
-
-    public static double[][] calculateSimilarities(String[] sentences){
+    public static double[][] calculateSimilarities(String[] sentences) {
         var result = new double[sentences.length][sentences.length];
-        for(int i = 0; i < sentences.length; i++){
-            for (int j = i + 1 ; j < sentences.length; j++) {
-                Set<String> wordsI = new HashSet<>(Set.of(sentences[i]
-                        .replaceAll("[,()\\[\\]\\-+=*@#&^%$!?.;:]", " ").split(" ")));
-                Set<String> wordsJ = Set.of(sentences[j].replaceAll("[,()\\[\\]\\-+=*@#&^%$!?.;:]", " ")
-                        .split(" "));
+        for (int i = 0; i < sentences.length; i++) {
+            for (int j = i + 1; j < sentences.length; j++) {
+                Set<String> wordsI = Arrays.stream(sentences[i]
+                        .replaceAll("[,()\\[\\]\\-+=*@#&^%$!?.;:]", " ").split(" "))
+                        .collect(Collectors.toSet());
+                Set<String> wordsJ = Arrays.stream(sentences[j].replaceAll("[,()\\[\\]\\-+=*@#&^%$!?.;:]", " ")
+                        .split(" ")).collect(Collectors.toSet());
 
                 long intersectionCount = wordsJ.parallelStream().filter(wordsI::contains).count();
                 wordsI.addAll(wordsJ);
 
                 long unionCount = wordsI.size();
 
-                result[i][j] = ((float)intersectionCount) / unionCount;
+                result[i][j] = ((float) intersectionCount) / unionCount;
 
                 result[j][i] = result[i][j];
 
@@ -95,7 +97,7 @@ public abstract class Chromosome implements Comparable<Chromosome> {
 
     @Override
     public int compareTo(Chromosome o) {
-        return (int)((- fitness + o.fitness) * 1e7);
+        return (int) ((-fitness + o.fitness) * 1e7);
     }
 
 

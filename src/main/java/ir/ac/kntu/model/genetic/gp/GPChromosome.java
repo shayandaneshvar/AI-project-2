@@ -1,8 +1,7 @@
-package ir.ac.kntu.model.gp;
+package ir.ac.kntu.model.genetic.gp;
 
-import ir.ac.kntu.model.Chromosome;
+import ir.ac.kntu.model.genetic.Chromosome;
 
-import java.util.LinkedList;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,6 +14,15 @@ public class GPChromosome extends Chromosome {
         chromosome = new TreeSet<>();
     }
 
+
+    @Override
+    public String getEquivalentText() {
+        return chromosome.stream()
+                .map(z -> sentences[z])
+                .reduce((x, y) -> x + y)
+                .orElse("");
+    }
+
     public GPChromosome(GPChromosome gpChromosome, TreeSet<Integer> chromosome) {
         super(gpChromosome.sentences, gpChromosome.sentenceScores, gpChromosome.similarities);
         this.chromosome = chromosome;
@@ -23,8 +31,8 @@ public class GPChromosome extends Chromosome {
     @Override
     public void mutate() {
         for (int i = 0; i < sentences.length; i++) {
-            if(ThreadLocalRandom.current().nextBoolean()){
-                if(ThreadLocalRandom.current().nextBoolean()){
+            if (ThreadLocalRandom.current().nextBoolean()) {
+                if (ThreadLocalRandom.current().nextBoolean()) {
                     chromosome.add(i);
                 } else {
                     chromosome.remove(i);
@@ -37,11 +45,11 @@ public class GPChromosome extends Chromosome {
     public void calculateFitness() {
         double scoreSum = 0;
         double similaritySum = 0;
-        for(Integer chr:chromosome) {
+        for (Integer chr : chromosome) {
             scoreSum += super.sentenceScores[chr];
 
-            for(Integer chrJ:chromosome){
-                if(chr.equals(chrJ)){
+            for (Integer chrJ : chromosome) {
+                if (chr.equals(chrJ)) {
                     continue;
                 }
                 similaritySum += similarities[chr][chrJ];
@@ -50,20 +58,17 @@ public class GPChromosome extends Chromosome {
         fitness = alpha * scoreSum - beta * similaritySum;
     }
 
-    public TreeSet<Integer> getChromosome(){
+    public TreeSet<Integer> getChromosome() {
         return chromosome;
     }
 
     @Override
     public void generate() {
         for (int i = 0; i < sentences.length; i++) {
-            if(ThreadLocalRandom.current().nextBoolean()){
+            if (ThreadLocalRandom.current().nextBoolean()) {
                 chromosome.add(i);
             }
         }
     }
-
-
-
 
 }
