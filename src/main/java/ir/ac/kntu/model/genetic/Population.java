@@ -45,13 +45,21 @@ public abstract class Population<T extends Chromosome> {
                 .orElse("");
     }
 
+    public double getBestFitness() {
+        return chromosomes.stream()
+                .sorted()
+                .findFirst().map(Chromosome::getFitness).orElse(-1d);
+    }
+
     protected final void calculateParentFitness() {
         chromosomes.forEach(Chromosome::calculateFitness);
     }
 
     protected List<T> selectCandidateParents() {
         Collections.sort(chromosomes);
-        return chromosomes.subList(0, 2 + populationSize / 10);
+        return chromosomes.stream()
+                .limit(2 + populationSize / 10)
+                .collect(Collectors.toList());
     }
 
     protected abstract void crossover();//4
@@ -72,10 +80,10 @@ public abstract class Population<T extends Chromosome> {
                 .nextBoolean()).collect(Collectors.toList()));
         Collections.sort(newChromosomes);
         chromosomes = newChromosomes.stream()
-                .limit(populationSize)
+                .limit(populationSize * 2L)
                 .collect(Collectors.toList());
         this.populationSize = chromosomes.size();
-        childChromosomes = null;
+        childChromosomes = new ArrayList<>();
     }
 
 }
