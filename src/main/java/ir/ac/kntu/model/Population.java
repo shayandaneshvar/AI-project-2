@@ -1,5 +1,7 @@
 package ir.ac.kntu.model;
 
+import ir.ac.kntu.model.ga.GAChromosome;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,6 +24,7 @@ public abstract class Population<T extends Chromosome> {
 
     }
 
+
     protected final void generateInitialPopulation() {
         for(int i = 0; i < populationSize; i++){
             T t = (T)T.newChromosome(sentences, sentenceScores, similarities);
@@ -34,11 +37,17 @@ public abstract class Population<T extends Chromosome> {
         chromosomes.forEach(Chromosome::calculateFitness);
     }
 
-    protected abstract List<T> selectCandidateParents();//3
+    protected List<T> selectCandidateParents() {
+        Collections.sort(chromosomes);
+        return chromosomes.subList(0, 2 + populationSize / 10);
+    }
 
     protected abstract void crossover();//4
 
-    protected abstract void mutate();//5
+
+    protected void mutate() {
+        childChromosomes.forEach(Chromosome::mutate);
+    }
 
     protected final void calculateChildFitness() {
         childChromosomes.forEach(Chromosome::calculateFitness);

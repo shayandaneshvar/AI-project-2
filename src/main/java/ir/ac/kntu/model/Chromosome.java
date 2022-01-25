@@ -8,6 +8,9 @@ public abstract class Chromosome implements Comparable<Chromosome> {
     protected final double[] sentenceScores;
     protected double fitness;
     protected double[][] similarities;
+    protected static final double alpha = 1;
+    protected static final double beta = 1;
+
 
     public Chromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
         this.sentenceScores = sentenceScores;
@@ -35,11 +38,7 @@ public abstract class Chromosome implements Comparable<Chromosome> {
 
     public static double[] calculateSentenceScores(String text, String[] sentences) {
         var sentenceScores = new double[sentences.length];
-        text = text.trim().replace(".", ";")
-                .replace("!", ";")
-                .replace("?", ";")
-                .replace(";", " ")
-                .replaceAll("[,()\\[\\]\\-+=*@#&^%$]", " ");
+        text = text.trim().replaceAll("[,()\\[\\]\\-+=*@#&^%$!?.;:]", " ");
 //                .replace("(", " ")
 //                .replace(")", " ")
 //                .replace("[", " ")
@@ -69,13 +68,15 @@ public abstract class Chromosome implements Comparable<Chromosome> {
 
 
 
+
+
     public static double[][] calculateSimilarities(String[] sentences){
         var result = new double[sentences.length][sentences.length];
         for(int i = 0; i < sentences.length; i++){
             for (int j = i + 1 ; j < sentences.length; j++) {
                 Set<String> wordsI = new HashSet<>(Set.of(sentences[i]
-                        .replaceAll("[,()\\[\\]\\-+=*@#&^%$.;!?]", " ").split(" ")));
-                Set<String> wordsJ = Set.of(sentences[j].replaceAll("[,()\\[\\]\\-+=*@#&^%$.;!?]", " ")
+                        .replaceAll("[,()\\[\\]\\-+=*@#&^%$!?.;:]", " ").split(" ")));
+                Set<String> wordsJ = Set.of(sentences[j].replaceAll("[,()\\[\\]\\-+=*@#&^%$!?.;:]", " ")
                         .split(" "));
 
                 long intersectionCount = wordsJ.parallelStream().filter(wordsI::contains).count();

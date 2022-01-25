@@ -12,11 +12,6 @@ public class GAPopulation extends Population<GAChromosome> {
         super(populationSize, text);
     }
 
-    @Override
-    protected List<GAChromosome> selectCandidateParents() {
-        Collections.sort(super.chromosomes);
-        return super.chromosomes.subList(0, 2 + super.populationSize / 10);
-    }
 
     @Override
     protected void crossover() {
@@ -35,11 +30,5 @@ public class GAPopulation extends Population<GAChromosome> {
                 super.childChromosomes.add(new GAChromosome(candidates.get(j), child2));
             }
         }
-    }
-
-
-    @Override
-    protected void mutate() {
-        childChromosomes.forEach(GAChromosome::mutate);
     }
 }

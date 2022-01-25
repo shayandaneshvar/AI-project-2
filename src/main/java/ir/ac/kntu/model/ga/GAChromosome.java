@@ -8,8 +8,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GAChromosome extends Chromosome {
     private final BitSet chromosome;
-    private static final double alpha = 1;
-    private static final double beta = 1;
 
 
     public GAChromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
