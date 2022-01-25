@@ -16,7 +16,6 @@ public abstract class Population<T extends Chromosome> {
     private final int summaryLimit;
 
     public Population(int summaryLimit, int populationSize, String text) {
-        generateInitialPopulation();
         this.populationSize = populationSize;
         this.sentences = Chromosome.getSentences(text);
         this.sentenceScores = Chromosome.calculateSentenceScores(text, sentences);
