@@ -58,7 +58,7 @@ public abstract class Population<T extends Chromosome> {
     protected List<T> selectCandidateParents() {
         Collections.sort(chromosomes);
         return chromosomes.stream()
-                .limit(2 + populationSize / 10)
+                .limit(Math.min(populationSize , chromosomes.size() / 2))
                 .collect(Collectors.toList());
     }
 
@@ -66,7 +66,10 @@ public abstract class Population<T extends Chromosome> {
 
 
     protected void mutate() {
-        childChromosomes.forEach(Chromosome::mutate);
+        childChromosomes.forEach(t -> {
+            if (ThreadLocalRandom.current().nextBoolean())
+                t.mutate();
+        });
     }
 
     protected final void calculateChildFitness() {
@@ -74,16 +77,20 @@ public abstract class Population<T extends Chromosome> {
     }
 
     protected final void replacement() {
-        List<T> newChromosomes = chromosomes.stream().filter(chromosome -> ThreadLocalRandom.current().nextBoolean())
+        List<T> newChromosomes = chromosomes.stream()
+                .filter(chromosome -> ThreadLocalRandom.current().nextBoolean())
                 .collect(Collectors.toList());
-        newChromosomes.addAll(childChromosomes.stream().filter(childChromosome -> ThreadLocalRandom.current()
+        newChromosomes.addAll(childChromosomes.stream()
+                .filter(childChromosome -> ThreadLocalRandom.current()
                 .nextBoolean()).collect(Collectors.toList()));
         Collections.sort(newChromosomes);
         chromosomes = newChromosomes.stream()
-                .limit(populationSize * 2L)
+                .limit(newChromosomes.size() / 2)
                 .collect(Collectors.toList());
-        this.populationSize = chromosomes.size();
         childChromosomes = new ArrayList<>();
     }
 
+    public long getCurrentPopulationSize(){
+        return chromosomes.size();
+    }
 }

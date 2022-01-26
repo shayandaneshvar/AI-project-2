@@ -19,8 +19,8 @@ public class GPChromosome extends Chromosome {
     public String getEquivalentText() {
         return chromosome.stream()
                 .map(z -> sentences[z])
-                .reduce((x, y) -> x + y + ".")
-                .orElse("");
+                .reduce((x, y) -> x + "." + y)
+                .orElse("") + ".";
     }
 
     public GPChromosome(GPChromosome gpChromosome, TreeSet<Integer> chromosome) {

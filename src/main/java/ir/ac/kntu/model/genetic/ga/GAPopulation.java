@@ -2,13 +2,12 @@ package ir.ac.kntu.model.genetic.ga;
 
 import ir.ac.kntu.model.BitSet;
 import ir.ac.kntu.model.genetic.Population;
-import ir.ac.kntu.model.genetic.gp.GPChromosome;
 
 
 public class GAPopulation extends Population<GAChromosome> {
 
-    public GAPopulation(int summaryLimit,int populationSize, String text) {
-        super(summaryLimit,populationSize, text);
+    public GAPopulation(int summaryLimit, int populationSize, String text) {
+        super(summaryLimit, populationSize, text);
     }
 
     public GAChromosome newChromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {

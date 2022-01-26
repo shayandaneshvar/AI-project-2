@@ -8,16 +8,24 @@ import ir.ac.kntu.view.View;
 public class MainController implements Runnable {
 
     public void init() {
-        run();
+        View.print("Welcome!");
+        while (true) {
+            run();
+            View.print("Exit? [y]es or [n]o ?");
+            if (View.getCommand().contains("y")) {
+                break;
+            }
+            View.print("Running Again...");
+        }
+        View.print("Exiting...");
     }
 
     @Override
     public void run() {
-        View.print("Welcome!");
         int algorithmId = View.chooseAlgorithm();
         int summaryLimit = View.getSummaryLimit();
         int populationSize = View.getPopulationSize();
-        View.print("Enter Text:");
+        View.print("Enter Text: (after you wrote the text, press enter and write END_TEXT)");
         String text = View.getText();
         Algorithm algorithm = null;
         switch (algorithmId) {
@@ -31,6 +39,6 @@ public class MainController implements Runnable {
                 // TODO: 1/25/2022
         }
         View.print("Running Algorithm...");
-        View.print(algorithm.call());
+        View.print("Final Result: \n" + algorithm.call());
     }
 }

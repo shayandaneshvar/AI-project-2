@@ -10,11 +10,15 @@ public final class View {
     }
 
     public static String getText() {
-        StringBuilder text = new StringBuilder("");
-        while (ScannerWrapper.hasNextLine()) {
-            text.append(ScannerWrapper.readLine());
+        StringBuilder text = new StringBuilder();
+        String lastLine = "";
+        while (!lastLine.replace("_", " ").contains("END TEXT")) {
+            if (!lastLine.isEmpty()) {
+                text.append(lastLine);
+            }
+            lastLine = ScannerWrapper.readLine();
         }
-        return text.toString();
+        return text.toString().trim();
     }
 
     public static String getCommand() {
