@@ -79,7 +79,7 @@ public class Nsga2Population extends Population<Nsga2Chromosome> {
         double f1Max = sentences.length * 16;
         double f1Min = 5;
         double f2Max = 1;
-        double f2Min = 0;
+        double f2Min = 0.5;
         for (int i = 1; i < I.size() - 1; i++) {
             var current = I.get(i);
             distances.put(current, distances.get(current) +
@@ -155,7 +155,6 @@ public class Nsga2Population extends Population<Nsga2Chromosome> {
                     dominatingChromosomeCount.put(q, count);
                     if (count == 0) {
                         temp.add(q);
-
                     }
                 }
             }
