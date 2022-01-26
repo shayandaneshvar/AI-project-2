@@ -1,5 +1,7 @@
 package ir.ac.kntu.model.genetic;
 
+import ir.ac.kntu.util.Util;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +19,7 @@ public abstract class Population<T extends Chromosome> {
 
     public Population(int summaryLimit, int populationSize, String text) {
         this.populationSize = populationSize;
-        this.sentences = Chromosome.getSentences(text);
+        this.sentences = Util.getSentences(text);
         this.sentenceScores = Chromosome.calculateSentenceScores(text, sentences);
         this.similarities = Chromosome.calculateSimilarities(sentences);
         this.summaryLimit = summaryLimit;

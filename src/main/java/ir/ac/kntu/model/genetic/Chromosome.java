@@ -33,12 +33,6 @@ public abstract class Chromosome implements Comparable<Chromosome> {
     public abstract void generate();
 
 
-    public static String[] getSentences(String text) {
-        text = text.replace(".", ";")
-                .replace("!", ";")
-                .replace("?", ";");
-        return text.split(";");
-    }
 
     public static double[] calculateSentenceScores(String text, String[] sentences) {
         var sentenceScores = new double[sentences.length];

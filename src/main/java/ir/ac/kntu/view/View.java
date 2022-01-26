@@ -39,11 +39,12 @@ public final class View {
     public static int chooseAlgorithm() {
         try {
             print("Choose Solving Algorithm:");
+            print("0- Greedy Algorithm");
             print("1- Genetic Algorithm");
             print("2- Genetic Programming");
             print("3- Multi-Objective Particle Swarm Optimization");
             int result = Integer.parseInt(getCommand());
-            if (result < 1 || result > 3) {
+            if (result < 0 || result > 3) {
                 throw new RuntimeException();
             }
             return result;
