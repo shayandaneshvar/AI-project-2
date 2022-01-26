@@ -19,7 +19,7 @@ public class GAChromosome extends Chromosome {
     public String getEquivalentText() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < chromosome.length(); i++) {
-            stringBuilder.append(chromosome.get(i) ? sentences[i] + "." : "");
+            stringBuilder.append(chromosome.get(i) ? sentences[i].trim() + ".\n" : "");
         }
         return stringBuilder.toString();
     }

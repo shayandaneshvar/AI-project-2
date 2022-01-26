@@ -22,7 +22,7 @@ public abstract class BaseGeneticAlgorithm<CHROMOSOME extends Chromosome>
         long start = System.currentTimeMillis();
         population.generateInitialPopulation();// 1
         IntStream.range(0, maxGenerations).forEach(z -> {
-            System.out.println("INFO: Generation " + z);
+            System.out.println("INFO: Generation " + (z + 1));
             population.calculateParentFitness(); // 2
             population.crossover();//3  &  4
             population.mutate(); // 5

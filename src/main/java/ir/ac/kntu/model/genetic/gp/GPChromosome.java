@@ -19,7 +19,7 @@ public class GPChromosome extends Chromosome {
     public String getEquivalentText() {
         return chromosome.stream()
                 .map(z -> sentences[z])
-                .reduce((x, y) -> x + "." + y)
+                .reduce((x, y) -> x.trim() + ".\n" + y.trim())
                 .orElse("") + ".";
     }
 

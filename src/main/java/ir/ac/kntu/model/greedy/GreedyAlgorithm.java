@@ -3,8 +3,11 @@ package ir.ac.kntu.model.greedy;
 import ir.ac.kntu.model.Algorithm;
 import ir.ac.kntu.util.Util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GreedyAlgorithm implements Algorithm {
     private final String[] sentences;
@@ -17,14 +20,23 @@ public class GreedyAlgorithm implements Algorithm {
 
     @Override
     public String call() {
-        StringBuilder result = new StringBuilder();
+        AtomicInteger chosenSentencesWords = new AtomicInteger();
+        List<String> chosenSentences = new ArrayList<>();
         Arrays.stream(sentences)
                 .sorted(Comparator.comparingInt(String::length))
                 .forEachOrdered(z -> {
-                    if (result.length() + z.length() <= summaryLength) {
-                        result.append(z).append(".");
+                    if (chosenSentencesWords.get() + z.split(" ").length < summaryLength) {
+                        chosenSentences.add(z);
+                        chosenSentencesWords.addAndGet(z.split(" ").length);
                     }
                 });
+
+        StringBuilder result = new StringBuilder();
+        for (String sentence : sentences) {
+            if (chosenSentences.contains(sentence)) {
+                result.append(sentence.trim()).append(".\n");
+            }
+        }
         return result.toString();
     }
 }

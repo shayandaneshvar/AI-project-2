@@ -12,7 +12,8 @@ public final class View {
     public static String getText() {
         StringBuilder text = new StringBuilder();
         String lastLine = "";
-        while (!lastLine.replace("_", " ").contains("END TEXT")) {
+        while (!lastLine.replace("_", " ").toUpperCase()
+                .contains("END TEXT")) {
             if (!lastLine.isEmpty()) {
                 text.append(lastLine);
             }
