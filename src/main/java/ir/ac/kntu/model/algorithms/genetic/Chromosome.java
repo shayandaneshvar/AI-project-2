@@ -12,7 +12,6 @@ public abstract class Chromosome implements Comparable<Chromosome> {
     protected static final double beta = 1;
     protected double fitness;
 
-
     public Chromosome(String[] sentences, double[] sentenceScores, double[][] similarities) {
         this.sentenceScores = sentenceScores;
         this.sentences = sentences;
@@ -27,12 +26,9 @@ public abstract class Chromosome implements Comparable<Chromosome> {
 
     public abstract void mutate();
 
-
     public abstract void calculateFitness();
 
     public abstract void generate();
-
-
 
     public static double[] calculateSentenceScores(String text, String[] sentences) {
         var sentenceScores = new double[sentences.length];

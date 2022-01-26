@@ -1,8 +1,8 @@
 package ir.ac.kntu.controller;
 
-import ir.ac.kntu.model.algorithms.Algorithm;
 import ir.ac.kntu.model.algorithms.genetic.ga.GeneticAlgorithm;
 import ir.ac.kntu.model.algorithms.genetic.gp.GeneticProgrammingAlgorithm;
+import ir.ac.kntu.model.algorithms.genetic.nsga2.Nsga2Algorithm;
 import ir.ac.kntu.model.algorithms.greedy.GreedyAlgorithm;
 import ir.ac.kntu.view.View;
 
@@ -28,23 +28,31 @@ public class MainController implements Runnable {
         int populationSize;
         View.print("Enter Text: (after you wrote the text, press enter and write END_TEXT)");
         String text = View.getText();
-        Algorithm algorithm = null;
         switch (algorithmId) {
             case 0:
-                algorithm = new GreedyAlgorithm(summaryLimit, text);
+                GreedyAlgorithm algorithm = new GreedyAlgorithm(summaryLimit, text);
+                View.print("Final Result: \n" + algorithm.call());
                 break;
             case 1:
                 populationSize = View.getPopulationSize();
-                algorithm = new GeneticAlgorithm(summaryLimit, populationSize, text);
+                GeneticAlgorithm ga = new GeneticAlgorithm(summaryLimit, populationSize, text);
+                View.print("Running Algorithm...");
+                View.print("Final Result: \n" + ga.call());
                 break;
             case 2:
                 populationSize = View.getPopulationSize();
-                algorithm = new GeneticProgrammingAlgorithm(summaryLimit, populationSize, text);
+                GeneticProgrammingAlgorithm gp = new GeneticProgrammingAlgorithm(summaryLimit, populationSize, text);
+                View.print("Running Algorithm...");
+                View.print("Final Result: \n" + gp.call());
                 break;
             case 3:
-                // TODO: 1/25/2022
+                populationSize = View.getPopulationSize();
+                var nsga2 = new Nsga2Algorithm(summaryLimit, populationSize, text);
+                View.print("Final Result:\n" + nsga2.call().stream().map(z ->
+                        "\n An output with Fitness 1 = " + z.getFirstFitness() +
+                                " and Fitness 2 = " + z.getSecondFitness() + " :\n"
+                                + z.getEquivalentText()).reduce((x, y) -> x + y));
+                break;
         }
-        View.print("Running Algorithm...");
-        View.print("Final Result: \n" + algorithm.call());
     }
 }

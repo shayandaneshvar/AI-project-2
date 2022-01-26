@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.IntStream;
 
 public abstract class BaseGeneticAlgorithm<CHROMOSOME extends Chromosome>
-        implements Algorithm {
+        implements Algorithm<String> {
 
     private Population<CHROMOSOME> population;
     private static final int maxGenerations = 20;

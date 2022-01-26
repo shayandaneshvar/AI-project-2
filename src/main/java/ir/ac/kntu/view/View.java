@@ -15,11 +15,11 @@ public final class View {
         while (!lastLine.replace("_", " ").toUpperCase()
                 .contains("END TEXT")) {
             if (!lastLine.isEmpty()) {
-                text.append(lastLine);
+                text.append(lastLine).append(" ");
             }
             lastLine = ScannerWrapper.readLine();
         }
-        return text.toString().trim();
+        return text.toString().trim().replaceAll("\\s+"," ");
     }
 
     public static String getCommand() {
@@ -41,9 +41,9 @@ public final class View {
         try {
             print("Choose Solving Algorithm:");
             print("0- Greedy Algorithm");
-            print("1- Genetic Algorithm");
-            print("2- Genetic Programming");
-            print("3- Multi-Objective Particle Swarm Optimization");
+            print("1- Genetic Algorithm (GA)");
+            print("2- Genetic Programming (GP)");
+            print("3- Non-dominated sorting genetic algorithm II (NSGA-II)");
             int result = Integer.parseInt(getCommand());
             if (result < 0 || result > 3) {
                 throw new RuntimeException();

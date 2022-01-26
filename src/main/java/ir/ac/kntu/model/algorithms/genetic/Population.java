@@ -27,7 +27,7 @@ public abstract class Population<T extends Chromosome> {
 
     public abstract T newChromosome(String[] sentences, double[] sentenceScores, double[][] similarities);
 
-    protected final void generateInitialPopulation() {
+    public final void generateInitialPopulation() {
         for (int i = 0; i < populationSize; i++) {
             T t = newChromosome(sentences, sentenceScores, similarities);
             t.generate();
@@ -53,46 +53,52 @@ public abstract class Population<T extends Chromosome> {
                 .findFirst().map(Chromosome::getFitness).orElse(-1d);
     }
 
-    protected final void calculateParentFitness() {
+    public final void calculateParentFitness() {
         chromosomes.forEach(Chromosome::calculateFitness);
     }
 
     protected List<T> selectCandidateParents() {
         Collections.sort(chromosomes);
         return chromosomes.stream()
-                .limit(Math.min(populationSize , chromosomes.size() / 2))
+                .filter(t -> t.getEquivalentText().trim().split(" ").length > summaryLimit)
+                .limit(populationSize)
                 .collect(Collectors.toList());
     }
 
     protected abstract void crossover();//4
 
 
-    protected void mutate() {
+    public void mutate() {
         childChromosomes.forEach(t -> {
             if (ThreadLocalRandom.current().nextBoolean())
                 t.mutate();
         });
     }
 
-    protected final void calculateChildFitness() {
+    public final void calculateChildFitness() {
         childChromosomes.forEach(Chromosome::calculateFitness);
     }
 
-    protected final void replacement() {
-        List<T> newChromosomes = chromosomes.stream()
-                .filter(chromosome -> ThreadLocalRandom.current().nextBoolean())
-                .collect(Collectors.toList());
-        newChromosomes.addAll(childChromosomes.stream()
-                .filter(childChromosome -> ThreadLocalRandom.current()
-                .nextBoolean()).collect(Collectors.toList()));
+    protected void replacement() {
+        List<T> newChromosomes = new ArrayList<>(chromosomes);
+        newChromosomes.addAll(childChromosomes);
         Collections.sort(newChromosomes);
-        chromosomes = newChromosomes.stream()
-                .limit(newChromosomes.size() / 2)
-                .collect(Collectors.toList());
+        while (newChromosomes.size() > populationSize) {
+            int index = ThreadLocalRandom.current().nextInt(0, newChromosomes.size());
+            newChromosomes.remove(index);
+        }
         childChromosomes = new ArrayList<>();
     }
 
-    public long getCurrentPopulationSize(){
+    public long getCurrentPopulationSize() {
         return chromosomes.size();
+    }
+
+    public final List<T> getChromosomes() {
+        return chromosomes;
+    }
+
+    protected int getSummaryLimit() {
+        return summaryLimit;
     }
 }
