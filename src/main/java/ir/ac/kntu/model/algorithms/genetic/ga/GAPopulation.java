@@ -1,7 +1,7 @@
-package ir.ac.kntu.model.genetic.ga;
+package ir.ac.kntu.model.algorithms.genetic.ga;
 
-import ir.ac.kntu.model.BitSet;
-import ir.ac.kntu.model.genetic.Population;
+import ir.ac.kntu.model.datastructures.BitSet;
+import ir.ac.kntu.model.algorithms.genetic.Population;
 
 
 public class GAPopulation extends Population<GAChromosome> {

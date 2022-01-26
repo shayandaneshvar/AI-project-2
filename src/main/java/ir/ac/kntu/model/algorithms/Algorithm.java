@@ -1,4 +1,4 @@
-package ir.ac.kntu.model;
+package ir.ac.kntu.model.algorithms;
 
 import java.util.concurrent.Callable;
 

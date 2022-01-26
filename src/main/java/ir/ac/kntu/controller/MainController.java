@@ -1,9 +1,9 @@
 package ir.ac.kntu.controller;
 
-import ir.ac.kntu.model.Algorithm;
-import ir.ac.kntu.model.genetic.ga.GeneticAlgorithm;
-import ir.ac.kntu.model.genetic.gp.GeneticProgrammingAlgorithm;
-import ir.ac.kntu.model.greedy.GreedyAlgorithm;
+import ir.ac.kntu.model.algorithms.Algorithm;
+import ir.ac.kntu.model.algorithms.genetic.ga.GeneticAlgorithm;
+import ir.ac.kntu.model.algorithms.genetic.gp.GeneticProgrammingAlgorithm;
+import ir.ac.kntu.model.algorithms.greedy.GreedyAlgorithm;
 import ir.ac.kntu.view.View;
 
 public class MainController implements Runnable {

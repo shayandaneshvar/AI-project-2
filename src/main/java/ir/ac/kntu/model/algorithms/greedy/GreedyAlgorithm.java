@@ -1,6 +1,6 @@
-package ir.ac.kntu.model.greedy;
+package ir.ac.kntu.model.algorithms.greedy;
 
-import ir.ac.kntu.model.Algorithm;
+import ir.ac.kntu.model.algorithms.Algorithm;
 import ir.ac.kntu.util.Util;
 
 import java.util.ArrayList;

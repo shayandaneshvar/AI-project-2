@@ -1,6 +1,6 @@
-package ir.ac.kntu.model.genetic.gp;
+package ir.ac.kntu.model.algorithms.genetic.gp;
 
-import ir.ac.kntu.model.genetic.Chromosome;
+import ir.ac.kntu.model.algorithms.genetic.Chromosome;
 
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;

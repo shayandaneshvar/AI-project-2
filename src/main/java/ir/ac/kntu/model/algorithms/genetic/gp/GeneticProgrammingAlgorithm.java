@@ -1,6 +1,6 @@
-package ir.ac.kntu.model.genetic.gp;
+package ir.ac.kntu.model.algorithms.genetic.gp;
 
-import ir.ac.kntu.model.genetic.BaseGeneticAlgorithm;
+import ir.ac.kntu.model.algorithms.genetic.BaseGeneticAlgorithm;
 
 public class GeneticProgrammingAlgorithm extends BaseGeneticAlgorithm<GPChromosome> {
     public GeneticProgrammingAlgorithm(int summaryLimit, int length, String text) {

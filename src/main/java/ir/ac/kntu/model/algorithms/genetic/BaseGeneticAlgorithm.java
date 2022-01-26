@@ -1,6 +1,6 @@
-package ir.ac.kntu.model.genetic;
+package ir.ac.kntu.model.algorithms.genetic;
 
-import ir.ac.kntu.model.Algorithm;
+import ir.ac.kntu.model.algorithms.Algorithm;
 
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.IntStream;

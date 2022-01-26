@@ -1,7 +1,7 @@
-package ir.ac.kntu.model;
+package ir.ac.kntu.model.datastructures;
 
 public class BitSet {
-    private boolean[] data;
+    private final boolean[] data;
 
     public BitSet(int bits) {
         data = new boolean[bits];

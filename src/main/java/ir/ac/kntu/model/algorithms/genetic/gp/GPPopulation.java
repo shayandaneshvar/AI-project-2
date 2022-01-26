@@ -1,6 +1,6 @@
-package ir.ac.kntu.model.genetic.gp;
+package ir.ac.kntu.model.algorithms.genetic.gp;
 
-import ir.ac.kntu.model.genetic.Population;
+import ir.ac.kntu.model.algorithms.genetic.Population;
 
 import java.util.List;
 import java.util.TreeSet;

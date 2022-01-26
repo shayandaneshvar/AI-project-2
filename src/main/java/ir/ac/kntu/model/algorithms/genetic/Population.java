@@ -1,4 +1,4 @@
-package ir.ac.kntu.model.genetic;
+package ir.ac.kntu.model.algorithms.genetic;
 
 import ir.ac.kntu.util.Util;
 
