@@ -50,7 +50,7 @@ public class GPChromosome extends Chromosome {
             scoreSum += super.sentenceScores[chr];
 
             for (Integer chrJ : chromosome) {
-                if (chr.equals(chrJ)) {
+                if (chr.equals(chrJ) || !chromosome.contains(chrJ)) {
                     continue;
                 }
                 similaritySum += similarities[chr][chrJ];

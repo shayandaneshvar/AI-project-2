@@ -1,13 +1,9 @@
 package ir.ac.kntu.model.algorithms.genetic.nsga2;
 
 import ir.ac.kntu.model.algorithms.genetic.Population;
-import ir.ac.kntu.model.algorithms.genetic.ga.GAChromosome;
 import ir.ac.kntu.model.datastructures.BitSet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Nsga2Population extends Population<Nsga2Chromosome> {
@@ -25,6 +21,8 @@ public class Nsga2Population extends Population<Nsga2Chromosome> {
         var candidates = chromosomes.stream()
                 .filter(t -> t.getEquivalentText().trim().split(" ").length <= super.getSummaryLimit())
                 .collect(Collectors.toList());
+        // random shuffler
+        Collections.shuffle(candidates);
         for (int i = 0; i < candidates.size(); i += 2) {
             if (i + 1 == candidates.size()) {
                 break;
@@ -55,12 +53,12 @@ public class Nsga2Population extends Population<Nsga2Chromosome> {
     @Override
     protected void replacement() {
         chromosomes.addAll(childChromosomes);
-        childChromosomes = new ArrayList<>();
         List<Nsga2Chromosome> nextGenerationChromosomes = new ArrayList<>();
         var frontiers = nonDominatedSorting();
         var lastUnfitFrontier = firstFrontiersSelection(frontiers, nextGenerationChromosomes);
         crowdDistanceSorting(lastUnfitFrontier, nextGenerationChromosomes);
         chromosomes = nextGenerationChromosomes;
+        childChromosomes = new ArrayList<>();
     }
 
     private void crowdDistanceSorting(LinkedList<Nsga2Chromosome> frontier,

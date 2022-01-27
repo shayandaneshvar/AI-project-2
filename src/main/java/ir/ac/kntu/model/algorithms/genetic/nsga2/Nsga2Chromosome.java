@@ -49,7 +49,7 @@ public class Nsga2Chromosome extends GAChromosome {
         for (int i = 0; i < super.getChromosome().length(); i++) {
             scoreSum += super.getChromosome().get(i) ? super.sentenceScores[i] : 0;
             for (int j = 0; j < sentences.length; j++) {
-                if (i == j) {
+                if (i == j || !super.getChromosome().get(j)) {
                     continue;
                 }
                 similaritySum += similarities[i][j];

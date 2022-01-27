@@ -37,7 +37,7 @@ public class GAChromosome extends Chromosome {
         for (int i = 0; i < chromosome.length(); i++) {
             scoreSum += chromosome.get(i) ? super.sentenceScores[i] : 0;
             for (int j = 0; j < sentences.length; j++) {
-                if (i == j) {
+                if (i == j  || !getChromosome().get(j)) {
                     continue;
                 }
                 similaritySum += similarities[i][j];
