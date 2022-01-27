@@ -51,7 +51,8 @@ public class MainController implements Runnable {
                 View.print("Final Result:\n" + nsga2.call().stream().map(z ->
                         "\n An output with Fitness 1 = " + z.getFirstFitness() +
                                 " and Fitness 2 = " + z.getSecondFitness() + " :\n"
-                                + z.getEquivalentText()).reduce((x, y) -> x + y));
+                                + z.getEquivalentText()).reduce((x, y) -> x + y)
+                        .orElse(" "));
                 break;
         }
     }
