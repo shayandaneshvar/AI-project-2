@@ -1,0 +1,6 @@
+QASs are search engines that can return a short and accurate answer for each question in natural languages.
+The answer to the question that asked in such a system could be a document, a paragraph, a sentence, etc.
+Various features can be extracted from the text, through the ranking process.
+therefore, it is needed to use a method that considers all these views.
+In this regard, three different aspects (lexical, contextual and syntactical) of the text are considered.
+We have used a standard dataset and web data for assessing our system.

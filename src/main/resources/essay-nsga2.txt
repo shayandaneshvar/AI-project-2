@@ -1,0 +1,28 @@
+An output with Fitness 1 = 148.0 and Fitness 2 = 0.11208037526484285 :
+QASs are search engines that can return a short and accurate answer for each question in natural languages.
+The answer to the question that asked in such a system could be a document, a paragraph, a sentence, etc.
+It has been considered a Persian Multi-Objective QAS that would achieve the most probable answer from the documents that has been retrieved by the standard search engine.
+Various features can be extracted from the text, through the ranking process.
+Each of them examines the text from a perspective, but changes in the values of them are not consistent with each other.
+In this regard, three different aspects (lexical, contextual and syntactical) of the text are considered.
+We have used a standard dataset and web data for assessing our system.
+
+ An output with Fitness 1 = 31.0 and Fitness 2 = 0.35267531582879136 :
+Various features can be extracted from the text, through the ranking process.
+therefore, it is needed to use a method that considers all these views.
+
+ An output with Fitness 1 = 141.0 and Fitness 2 = 0.11688168886968389 :
+QASs are search engines that can return a short and accurate answer for each question in natural languages.
+The answer to the question that asked in such a system could be a document, a paragraph, a sentence, etc.
+It has been considered a Persian Multi-Objective QAS that would achieve the most probable answer from the documents that has been retrieved by the standard search engine.
+Various features can be extracted from the text, through the ranking process.
+therefore, it is needed to use a method that considers all these views.
+In this regard, three different aspects (lexical, contextual and syntactical) of the text are considered.
+We have used a standard dataset and web data for assessing our system.
+
+ An output with Fitness 1 = 93.0 and Fitness 2 = 0.15382539712514445 :
+QASs are search engines that can return a short and accurate answer for each question in natural languages.
+The answer to the question that asked in such a system could be a document, a paragraph, a sentence, etc.
+Various features can be extracted from the text, through the ranking process.
+therefore, it is needed to use a method that considers all these views.
+In this regard, three different aspects (lexical, contextual and syntactical) of the text are considered.

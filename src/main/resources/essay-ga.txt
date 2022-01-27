@@ -1,0 +1,7 @@
+In recent years, Question Answering Systems (QASs) have been known as one of the most significant tools to access information.
+In this paper, an approach is proposed to optimize the performance of web-based QASs for answering questions in Persian.
+It has been considered a Persian Multi-Objective QAS that would achieve the most probable answer from the documents that has been retrieved by the standard search engine.
+Various features can be extracted from the text, through the ranking process.
+therefore, it is needed to use a method that considers all these views.
+Because evolutionary algorithms are appropriate for issues that have a large search space and texts can be analyzed from various aspects, the proposed approach uses NSGA-II as a Multi-Objective Evolutionary algorithm (MOEA).
+Comparing the obtained results from the proposed approach with other existing systems, reveals that it yields considerable and effective results.
