@@ -1,6 +1,7 @@
 package ir.ac.kntu.model.algorithms.genetic.gp;
 
 import ir.ac.kntu.model.algorithms.genetic.Chromosome;
+import ir.ac.kntu.util.Util;
 
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
@@ -31,11 +32,11 @@ public class GPChromosome extends Chromosome {
     @Override
     public void mutate() {
         for (int i = 0; i < sentences.length; i++) {
-            if (ThreadLocalRandom.current().nextBoolean()) {
-                if (ThreadLocalRandom.current().nextBoolean()) {
-                    chromosome.add(i);
-                } else {
+            if (Util.action(1d/chromosome.size())) {
+                if(chromosome.contains(i)){
                     chromosome.remove(i);
+                }else {
+                    chromosome.add(i);
                 }
             }
         }

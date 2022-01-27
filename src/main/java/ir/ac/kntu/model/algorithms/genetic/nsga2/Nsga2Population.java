@@ -23,7 +23,7 @@ public class Nsga2Population extends Population<Nsga2Chromosome> {
     @Override
     protected void crossover() {
         var candidates = chromosomes.stream()
-                .filter(t -> t.getEquivalentText().trim().split(" ").length > super.getSummaryLimit())
+                .filter(t -> t.getEquivalentText().trim().split(" ").length <= super.getSummaryLimit())
                 .collect(Collectors.toList());
         for (int i = 0; i < candidates.size(); i += 2) {
             if (i + 1 == candidates.size()) {

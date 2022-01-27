@@ -1,8 +1,9 @@
 package ir.ac.kntu.model.algorithms.genetic.ga;
 
 
-import ir.ac.kntu.model.datastructures.BitSet;
 import ir.ac.kntu.model.algorithms.genetic.Chromosome;
+import ir.ac.kntu.model.datastructures.BitSet;
+import ir.ac.kntu.util.Util;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -52,8 +53,8 @@ public class GAChromosome extends Chromosome {
     @Override
     public void mutate() {
         for (int i = 0; i < chromosome.length(); i++) {
-            if (ThreadLocalRandom.current().nextBoolean()) {
-                chromosome.set(i, ThreadLocalRandom.current().nextBoolean());
+            if (Util.action(1D / chromosome.length())) { // 1/l probability
+                chromosome.set(i, ! chromosome.get(i));
             }
         }
     }

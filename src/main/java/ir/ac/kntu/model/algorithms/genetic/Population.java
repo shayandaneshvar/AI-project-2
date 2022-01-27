@@ -60,8 +60,8 @@ public abstract class Population<T extends Chromosome> {
     protected List<T> selectCandidateParents() {
         Collections.sort(chromosomes);
         return chromosomes.stream()
-                .filter(t -> t.getEquivalentText().trim().split(" ").length > summaryLimit)
-                .limit(populationSize)
+                .filter(t -> t.getEquivalentText().trim().split(" ").length <= summaryLimit)
+                .limit(Math.max(populationSize / 2, 2))
                 .collect(Collectors.toList());
     }
 
@@ -83,10 +83,14 @@ public abstract class Population<T extends Chromosome> {
         List<T> newChromosomes = new ArrayList<>(chromosomes);
         newChromosomes.addAll(childChromosomes);
         Collections.sort(newChromosomes);
-        while (newChromosomes.size() > populationSize) {
+        while (newChromosomes.size() > populationSize * 1.3) {
             int index = ThreadLocalRandom.current().nextInt(0, newChromosomes.size());
             newChromosomes.remove(index);
         }
+        chromosomes = newChromosomes.stream() // Truncation Method
+                .sorted()
+                .limit(populationSize)
+                .collect(Collectors.toList());
         childChromosomes = new ArrayList<>();
     }
 
