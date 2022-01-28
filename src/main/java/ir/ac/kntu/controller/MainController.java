@@ -31,24 +31,24 @@ public class MainController implements Runnable {
         switch (algorithmId) {
             case 0:
                 GreedyAlgorithm algorithm = new GreedyAlgorithm(summaryLimit, text);
-                View.print("Final Result: \n" + algorithm.call());
+                View.print("Final Result: \n" + algorithm.callWithRetry());
                 break;
             case 1:
                 populationSize = View.getPopulationSize();
                 GeneticAlgorithm ga = new GeneticAlgorithm(summaryLimit, populationSize, text);
                 View.print("Running Algorithm...");
-                View.print("Final Result: \n" + ga.call());
+                View.print("Final Result: \n" + ga.callWithRetry());
                 break;
             case 2:
                 populationSize = View.getPopulationSize();
                 GeneticProgrammingAlgorithm gp = new GeneticProgrammingAlgorithm(summaryLimit, populationSize, text);
                 View.print("Running Algorithm...");
-                View.print("Final Result: \n" + gp.call());
+                View.print("Final Result: \n" + gp.callWithRetry());
                 break;
             case 3:
                 populationSize = View.getPopulationSize();
                 var nsga2 = new Nsga2Algorithm(summaryLimit, populationSize, text);
-                View.print("Final Result:\n" + nsga2.call().stream().map(z ->
+                View.print("Final Result:\n" + nsga2.callWithRetry().stream().map(z ->
                         "\n An output with Fitness 1 = " + z.getFirstFitness() +
                                 " and Fitness 2 = " + z.getSecondFitness() + " :\n"
                                 + z.getEquivalentText()).reduce((x, y) -> x + y)

@@ -82,6 +82,9 @@ public abstract class Population<T extends Chromosome> {
     protected void replacement() {
         List<T> newChromosomes = new ArrayList<>(chromosomes);
         newChromosomes.addAll(childChromosomes);
+        newChromosomes = newChromosomes.stream()
+                .filter(t -> t.getEquivalentText().trim().split(" ").length < summaryLimit)
+                .collect(Collectors.toList());
         Collections.sort(newChromosomes);
         while (newChromosomes.size() > populationSize * 1.3) {
             int index = ThreadLocalRandom.current().nextInt(0, newChromosomes.size());
